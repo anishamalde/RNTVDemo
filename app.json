@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "my-project",
+    "slug": "my-project",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "org.name.myproject"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "92a86b92-e69b-49f9-a138-c8b17861dd0f"
+      }
+    }
+  },
+  "name": "rn-demo"
+}
