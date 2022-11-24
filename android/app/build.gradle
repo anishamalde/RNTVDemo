@@ -236,6 +236,20 @@ android {
             keyPassword 'android'
         }
     }
+    flavorDimensions "appstore"
+
+    productFlavors {
+        googlePlay {
+            dimension "appstore"
+            missingDimensionStrategy "store", "play"
+        }
+
+        amazon {
+            dimension "appstore"
+            missingDimensionStrategy "store", "amazon"
+        }
+    }
+
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
@@ -287,7 +301,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-
+    implementation 'com.amazon.device:amazon-appstore-sdk:3.0.3'
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

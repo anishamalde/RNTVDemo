@@ -9,7 +9,7 @@ const VideoLandingPage = ({ navigation, route }: Props) => {
 
   return (
     <ImageBackground
-      source={video.imgURL}
+      source={{uri: video.imgURL }}
       imageStyle={styles.imageStyle}
       style={styles.videoPageContainer}
     >
@@ -17,7 +17,7 @@ const VideoLandingPage = ({ navigation, route }: Props) => {
       <Text style={styles.videoDescription}>{video.description}</Text>
       <View style={styles.buttonContainer}>
         <Button
-          title="Watch now"
+          title="Buy now"
           color="#FFA724"
           onPress={() =>
             navigation.navigate("VideoPlayerPage", {

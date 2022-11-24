@@ -1,11 +1,18 @@
 import React from "react";
-import { VideoDataProvider } from "./src/Context/VideoDataContext";
 import { VideoLandingPage, LandingPage, VideoPage } from "./src/Screens";
 import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootStackParamList } from "./src/data/types";
+import { withIAPContext, useIAP } from 'react-native-iap';
 
-export default function App() {
+const App = () => {
+
+  const {
+    connected,
+  } = useIAP();
+
+  console.log(connected)
+  
   const Stack = createNativeStackNavigator<RootStackParamList>();
 
   const MyTheme = {
@@ -18,7 +25,6 @@ export default function App() {
   };
 
   return (
-    <VideoDataProvider>
       <NavigationContainer theme={MyTheme}>
         <Stack.Navigator
           screenOptions={{
@@ -30,6 +36,6 @@ export default function App() {
           <Stack.Screen name="VideoPlayerPage" component={VideoPage} />
         </Stack.Navigator>
       </NavigationContainer>
-    </VideoDataProvider>
   );
 }
+export default withIAPContext(App);

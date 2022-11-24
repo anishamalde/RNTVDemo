@@ -3,11 +3,15 @@ import { VideoCard, Header } from "../../Components";
 import { RootStackParamList } from "../../data/types";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState, useEffect } from "react";
+import {useIAP} from 'react-native-iap';
 
 type Props = NativeStackScreenProps<RootStackParamList, "LandingPage">;
 
 const LandingPage = ({ navigation }: Props) => {
 
+  const {connected } = useIAP();
+  console.log(connected)
+  
   const [videos, setVideos] = useState();
 
   const url = "https://my-fr4ncis-bucket.s3.amazonaws.com/TestData.json";
@@ -21,9 +25,9 @@ const LandingPage = ({ navigation }: Props) => {
       });
   };
 
-  useEffect(() => {
-    getAllVideos();
-  }, []);;
+  // useEffect(() => {
+  //   getAllVideos();
+  // }, []);;
 
   return (
     <>
