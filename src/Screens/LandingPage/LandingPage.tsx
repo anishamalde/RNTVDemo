@@ -1,13 +1,29 @@
 import { StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { VideoCard, Header } from "../../Components";
-import { useVideoData } from "../../Context/VideoDataContext";
 import { RootStackParamList } from "../../data/types";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import React, { useState, useEffect } from "react";
 
 type Props = NativeStackScreenProps<RootStackParamList, "LandingPage">;
 
 const LandingPage = ({ navigation }: Props) => {
-  const { videos } = useVideoData();
+
+  const [videos, setVideos] = useState();
+
+  const url = "https://my-fr4ncis-bucket.s3.amazonaws.com/TestData.json";
+
+  const getAllVideos = () => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => setVideos(data.testData))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getAllVideos();
+  }, []);;
 
   return (
     <>

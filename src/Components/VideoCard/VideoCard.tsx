@@ -7,7 +7,6 @@ interface IProps {
 }
 
 const VideoCard = ({ title, imgURL, description }: IProps) => {
-  console.log(description);
 
   return (
     <View style={styles.videoCardContainer}>
