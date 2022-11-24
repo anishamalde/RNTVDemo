@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { StyleSheet, FlatList, TouchableOpacity, Text } from "react-native";
 import { VideoCard, Header } from "../../Components";
 import { RootStackParamList } from "../../data/types";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -10,7 +10,6 @@ type Props = NativeStackScreenProps<RootStackParamList, "LandingPage">;
 const LandingPage = ({ navigation }: Props) => {
 
   const {connected } = useIAP();
-  console.log(connected)
   
   const [videos, setVideos] = useState();
 
@@ -25,13 +24,14 @@ const LandingPage = ({ navigation }: Props) => {
       });
   };
 
-  // useEffect(() => {
-  //   getAllVideos();
-  // }, []);;
+  useEffect(() => {
+    getAllVideos();
+  }, []);;
 
   return (
     <>
       <Header />
+      {connected && <Text>connected</Text>}
       <FlatList
         style={styles.landingPageContainer}
         data={videos}
