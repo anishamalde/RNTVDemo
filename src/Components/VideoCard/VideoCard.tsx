@@ -26,6 +26,7 @@ const VideoCard = ({ title, imgURL, description }: IProps) => {
 const styles = StyleSheet.create({
   videoImage: {
     height: "75%",
+    borderRadius: 10,
   },
   videoText: {
     height: "25%",
@@ -43,8 +44,9 @@ const styles = StyleSheet.create({
   },
   videoCardContainer: {
     display: "flex",
-    border: "1px solid white",
-    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 10,
     width: 350,
     height: 450,
   },

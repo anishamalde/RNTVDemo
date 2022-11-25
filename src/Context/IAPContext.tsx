@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import {useIAP} from 'react-native-iap';
+// import {useIAP} from 'react-native-iap';
 
 interface IProps {
   children: React.ReactNode;
