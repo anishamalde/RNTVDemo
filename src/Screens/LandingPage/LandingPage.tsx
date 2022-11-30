@@ -3,14 +3,12 @@ import { VideoCard, Header } from "../../Components";
 import { RootStackParamList } from "../../data/types";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState, useEffect } from "react";
-// import {useIAP} from 'react-native-iap';
 import { Dimensions } from 'react-native';
 
 type Props = NativeStackScreenProps<RootStackParamList, "LandingPage">;
 
 const LandingPage = ({ navigation }: Props) => {
 
-  // const {connected, subscriptions } = useIAP();
   const { width } = Dimensions.get('window');
   const [videos, setVideos] = useState();
 

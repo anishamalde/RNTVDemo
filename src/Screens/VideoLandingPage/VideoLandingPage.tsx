@@ -1,10 +1,40 @@
-import { ImageBackground, Text, StyleSheet, Button, View } from "react-native";
+import { ImageBackground, Text, StyleSheet, Button, View} from "react-native";
+import { useEffect} from 'react';
 import { RootStackParamList } from "../../data/types";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { requestSubscription, useIAP } from 'react-native-iap';
 
 type Props = NativeStackScreenProps<RootStackParamList, "Videos">;
 
 const VideoLandingPage = ({ navigation, route }: Props) => {
+
+  const {connected, subscriptions, getSubscriptions} = useIAP();
+
+  useEffect(() => {
+    if (connected) {
+      getSubscriptions({skus: [
+        'com.amazon.sample.iap.subscription.mymagazine.month',
+        'com.amazon.sample.iap.subscription.mymagazine.quarter',
+      ]});
+    }
+  }, [getSubscriptions]);
+
+  const handleBuySubscription = async (
+    productId: string,
+    offerToken?: string,
+  ) => {
+    try {
+      await requestSubscription({
+        sku: productId,
+        ...(offerToken && {
+          subscriptionOffers: [{sku: productId, offerToken}],
+        }),
+      });
+    } catch (error) {
+        console.log({message: `[${error.code}]: ${error.message}`, error});
+    }
+  };
+
   const video = route.params.video;
 
   return (
@@ -15,15 +45,20 @@ const VideoLandingPage = ({ navigation, route }: Props) => {
     >
       <Text style={styles.videoTitle}>{video.title}</Text>
       <Text style={styles.videoDescription}>{video.description}</Text>
+      <Text>{connected ? 'connected' : 'not connected'}</Text>
+      <Text>{subscriptions.length}</Text>
+      {subscriptions.map((subscription) => (
+            <Text>{subscription.productId}</Text>
+          ))}
       <View style={styles.buttonContainer}>
         <Button
           title="Buy now"
           color="#FFA724"
-          onPress={() =>
-            navigation.navigate("VideoPlayerPage", {
-              videoURL: video.videoURL,
-            })
-          }
+          // onPress={() =>
+          //   navigation.navigate("VideoPlayerPage", {
+          //     videoURL: video.videoURL,
+          //   })
+          onPress={()=> handleBuySubscription("com.amazon.sample.iap.subscription.mymagazine.quarter")}
         />
         <Button
           title="Back"

@@ -1,5 +1,5 @@
 import { StyleSheet, Button, View } from "react-native";
-// import Video from 'react-native-video';
+import { Video } from 'expo-av';
 import { RootStackParamList } from "../../data/types";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -15,7 +15,7 @@ const VideoPage = ({ navigation, route }: Props) => {
         onPress={() => navigation.goBack()}
       />
     </View>
-    {/* <Video source={{uri: route.params.videoURL}} /> */}
+    {/* <Video source={{uri: route.params.videoURL}} useNativeControls style={styles.video} /> */}
     </>
   );
 };
@@ -26,7 +26,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 10,
+    zIndex: 10
   },
+  video: {
+   position: 'absolute',
+   width: '100%',
+   height: '100%'
+  }
 });
 
 export default VideoPage;

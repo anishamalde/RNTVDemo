@@ -3,7 +3,7 @@ import { VideoLandingPage, LandingPage, VideoPage } from "./src/Screens";
 import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootStackParamList } from "./src/data/types";
-// import { withIAPContext, useIAP } from 'react-native-iap';
+import { withIAPContext } from 'react-native-iap';
 
 const App = () => {
   
@@ -32,5 +32,4 @@ const App = () => {
       </NavigationContainer>
   );
 }
-// export default withIAPContext(App);
-export default App
+export default withIAPContext(App);
